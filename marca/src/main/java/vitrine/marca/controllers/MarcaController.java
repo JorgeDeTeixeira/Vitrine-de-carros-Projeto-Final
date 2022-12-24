@@ -1,10 +1,12 @@
 package vitrine.marca.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,7 +21,7 @@ public class MarcaController {
 	@Autowired
 	private MarcaRepository marcaRepository;
 
-	@RequestMapping("/")
+	@RequestMapping
 	public String home() {
 		return "home";
 	}
@@ -43,5 +45,22 @@ public class MarcaController {
 		ModelAndView mv = new ModelAndView("marca/lista");
 		mv.addObject("marcas", marcas);
 		return mv;
+	}
+
+	@GetMapping("/{id}")
+	public ModelAndView detalharMarca(@PathVariable Long id) {
+		ModelAndView md = new ModelAndView();
+		Optional<Marca> opt = marcaRepository.findById(id);
+
+		if (opt.isEmpty()) {
+			md.setViewName("redirect:/vitrine/marcas");
+			return md;
+		}
+
+		md.setViewName("marca/detalhes");
+		Marca marca = opt.get();
+		md.addObject("marca", marca);
+
+		return md;
 	}
 }

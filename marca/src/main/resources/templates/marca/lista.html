@@ -25,7 +25,7 @@
 								<span class="card-title" th:text='${m.nome}'></span> - <span
 									class="card-title" th:text="${m.nacionalidade}"></span>
 							</p>
-							<a href="#">Vizualizar</a>
+							<a th:href="@{/vitrine/{id}(id=${m.id})}"><span>Vizualizar</span></a>
 						</div>
 					</div>
 				</div>
