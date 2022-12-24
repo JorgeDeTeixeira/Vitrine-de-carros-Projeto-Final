@@ -86,4 +86,5 @@ public class MarcaController {
 
 		return "redirect:/vitrine/{idMarca}";
 	}
+
 }

@@ -65,6 +65,25 @@
 			</div>
 		</div>
 
+		<div class="row" th:each="c : ${carros}">
+			<div class="col s12">
+				<div class="card">
+					<div class="card-image">
+						<img
+							src="th:text='${c.imagem}'">
+						<span class="card-title">Nome</span>
+					</div>
+					<div class="card-content">
+						<p>
+							Ano: <strong th:text="${c.ano}"></strong>
+						</p>
+						<p>
+							Preço: <strong th:text="${c.preco}"></strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
