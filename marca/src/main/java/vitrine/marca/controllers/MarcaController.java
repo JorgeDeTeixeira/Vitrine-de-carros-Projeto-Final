@@ -31,16 +31,16 @@ public class MarcaController {
 	}
 
 	@GetMapping("/marca/form")
-	public String formulario() {
+	public String formulario(Marca marca) {
 		return "marca/formMarca";
 	}
 
 	@PostMapping("marca")
-	public String adicionarMarca(Marca marca) {
+	public String salvarMarca(Marca marca) {
 		System.out.println(marca);
 		marcaRepository.save(marca);
 
-		return "marca/marcaAdicionada";
+		return "redirect:/vitrine/marcas";
 	}
 
 	@GetMapping("marcas")
@@ -52,7 +52,7 @@ public class MarcaController {
 	}
 
 	@GetMapping("/{id}")
-	public ModelAndView detalhar(@PathVariable Long id) {
+	public ModelAndView detalhar(@PathVariable Long id, Carro carro) {
 		ModelAndView md = new ModelAndView();
 		Optional<Marca> opt = marcaRepository.findById(id);
 
@@ -115,6 +115,50 @@ public class MarcaController {
 		}
 
 		return "redirect:/vitrine/{idMarca}";
+	}
+
+	@GetMapping("/{id}/selecionar")
+	public ModelAndView selecionarMarca(@PathVariable Long id) {
+		ModelAndView md = new ModelAndView();
+		Optional<Marca> opt = marcaRepository.findById(id);
+		if (opt.isEmpty()) {
+			md.setViewName("redirect:/vitrine/marcas");
+			return md;
+		}
+
+		Marca marca = opt.get();
+		md.setViewName("marca/formMarca");
+		md.addObject("marca", marca);
+
+		return md;
+	}
+
+	@GetMapping("/{idMarca}/carros/{idCarro}/selecionar")
+	public ModelAndView selecionarCarro(@PathVariable Long idMarca, @PathVariable Long idCarro) {
+		ModelAndView md = new ModelAndView();
+
+		Optional<Marca> optMarca = marcaRepository.findById(idMarca);
+		Optional<Carro> optCarro = carroRepository.findById(idCarro);
+
+		if (optMarca.isEmpty() || optCarro.isEmpty()) {
+			md.setViewName("redirect:/vitrine/marcas");
+			return md;
+		}
+
+		Marca marca = optMarca.get();
+		Carro carro = optCarro.get();
+
+		if (marca.getId() != carro.getMarca().getId()) {
+			md.setViewName("redirect:/vitrine/marcas");
+			return md;
+		}
+
+		md.setViewName("marca/detalhes");
+		md.addObject("carro", carro);
+		md.addObject("marca", marca);
+		md.addObject("carros", carroRepository.findByMarca(marca));
+
+		return md;
 	}
 
 }

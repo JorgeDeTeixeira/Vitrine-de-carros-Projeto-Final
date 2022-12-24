@@ -28,8 +28,14 @@
 									class="card-title" th:text="${m.nacionalidade}"></span>
 							</p>
 							<a th:href="@{/vitrine/{id}(id=${m.id})}"><span>Vizualizar</span></a>
-							<a th:href="@{/vitrine/{id}/remover(id=${m.id})}" style="margin-top: 10px;"><span
-								class="material-icons">delete</span></a>
+							<div>
+								<p>
+									<a th:href="@{/vitrine/{id}/remover(id=${m.id})}"
+										style="margin-top: 10px;"><span class="material-icons">delete</span></a>
+									<a th:href="@{/vitrine/{id}/selecionar(id=${m.id})}"
+										style="margin-top: 10px;"><span class="material-icons">edit</span></a>
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>

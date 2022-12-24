@@ -15,15 +15,21 @@
 		<h1>Adicionar Marca</h1>
 
 		<form action="/vitrine/marca" method="post">
-
 			<div>
-				<label>Nome:</label> <input type="text" name="nome">
+				<input type="hidden" name="id" th:value="${marca.id}"
+					readonly="readonly">
 			</div>
 			<div>
-				<label>Nacionalide:</label> <input type="text" name="nacionalidade">
+				<label>Nome:</label> <input type="text" name="nome"
+					th:value="${marca.nome}">
 			</div>
 			<div>
-				<label>Logo:</label> <input type="text" name="logo">
+				<label>Nacionalidade:</label> <input type="text"
+					name="nacionalidade" th:value="${marca.nacionalidade}">
+			</div>
+			<div>
+				<label>Logo:</label> <input type="text" name="logo"
+					th:value="${marca.logo}">
 			</div>
 			<div>
 				<button class="waves-effect waves-light btn" type="submit">Salvar</button>
