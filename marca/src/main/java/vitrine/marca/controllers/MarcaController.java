@@ -87,4 +87,34 @@ public class MarcaController {
 		return "redirect:/vitrine/{idMarca}";
 	}
 
+	@GetMapping("/{id}/remover")
+	public String apagarMarca(@PathVariable Long id) {
+
+		Optional<Marca> opt = marcaRepository.findById(id);
+
+		if (!opt.isEmpty()) {
+			Marca marca = opt.get();
+
+			List<Carro> carros = carroRepository.findByMarca(marca);
+
+			carroRepository.deleteAll(carros);
+			marcaRepository.delete(marca);
+		}
+
+		return "redirect:/vitrine/marcas";
+	}
+
+	@GetMapping("/{idMarca}/carros/{idCarro}/remover")
+	public String apagarMarca(@PathVariable Long idMarca, @PathVariable Long idCarro) {
+
+		Optional<Carro> opt = carroRepository.findById(idCarro);
+
+		if (!opt.isEmpty()) {
+			Carro carro = opt.get();
+			carroRepository.delete(carro);
+		}
+
+		return "redirect:/vitrine/{idMarca}";
+	}
+
 }

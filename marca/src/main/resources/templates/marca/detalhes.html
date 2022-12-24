@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 <title>Marca</title>
 </head>
 <body>
@@ -69,9 +71,7 @@
 			<div class="col s12">
 				<div class="card">
 					<div class="card-image">
-						<img
-							src="th:text='${c.imagem}'">
-						<span class="card-title">Nome</span>
+						<img src="th:text='${c.imagem}'"> <span class="card-title">Nome</span>
 					</div>
 					<div class="card-content">
 						<p>
@@ -80,6 +80,12 @@
 						<p>
 							Preço: <strong th:text="${c.preco}"></strong>
 						</p>
+						<div style="margin-top: 10px">
+							<a
+								th:href="@{/vitrine/{idMarca}/carros/{idCarro}/remover(idMarca=${marca.id}, idCarro=${c.id})}">
+								<button class="waves-effect waves-light btn">delete</button>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
