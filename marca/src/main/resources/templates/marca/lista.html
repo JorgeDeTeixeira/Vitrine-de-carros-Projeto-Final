@@ -7,6 +7,57 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <title>Marcas</title>
+
+<style>
+.msg-alertas {
+	width: 100%;
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 10px;
+	background-color: #FFFFFF;
+}
+
+.ms {
+	width: 100%;
+	margin: auto;
+	padding: 1em;
+	float: left;
+	display: block;
+	margin-bottom: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: 100;
+	font-size: 16px;
+}
+
+.erro {
+	background-color: #FFCACA;
+	border: 2px #a60202 solid;
+	color: #a60202;
+	border-radius: 5px;
+}
+
+.ok {
+	background-color: #A6FFBC;
+	border: 2px #00bd00 solid;
+	color: #00bd00;
+	border-radius: 5px;
+}
+
+.alerta {
+	background-color: #FFFFBF;
+	border: 2px #2b2b2b solid;
+	color: #2b2b2b;
+	border-radius: 5px;
+}
+
+.info {
+	background-color: #B3E7FF;
+	border: 2px #018ace solid;
+	color: #018ace;
+	border-radius: 5px;
+}
+</style>
+
 </head>
 <body>
 	<div th:replace="~{menu :: menu}"></div>
@@ -15,6 +66,10 @@
 
 		<h1>Lista de Carros</h1>
 
+		<div class="msg-alertas">
+			<span class="ms ok"><i class="icon icon-users-1"
+				th:if="${mensagem}" th:text="${mensagem}"></i> </span>
+		</div>
 		<div th:each="m : ${marcas}">
 			<div class="row">
 				<div class="col s12 m6">

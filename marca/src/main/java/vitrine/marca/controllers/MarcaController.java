@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 import vitrine.marca.models.Carro;
@@ -38,13 +39,14 @@ public class MarcaController {
 	}
 
 	@PostMapping("marca")
-	public String salvarMarca(@Valid Marca marca, BindingResult result) {
+	public String salvarMarca(@Valid Marca marca, BindingResult result, RedirectAttributes attributes) {
 
 		if (result.hasErrors()) {
 			return formulario(marca);
 		}
 
 		marcaRepository.save(marca);
+		attributes.addFlashAttribute("mensagem", "Marca " + marca.getNome() + " adicionada com sucesso!");
 
 		return "redirect:/vitrine/marcas";
 	}
@@ -94,7 +96,7 @@ public class MarcaController {
 	}
 
 	@GetMapping("/{id}/remover")
-	public String apagarMarca(@PathVariable Long id) {
+	public String apagarMarca(@PathVariable Long id, RedirectAttributes attributes) {
 
 		Optional<Marca> opt = marcaRepository.findById(id);
 
@@ -105,6 +107,7 @@ public class MarcaController {
 
 			carroRepository.deleteAll(carros);
 			marcaRepository.delete(marca);
+			attributes.addFlashAttribute("mensagem", "Marca " + marca.getNome() + " removida com sucesso!");
 		}
 
 		return "redirect:/vitrine/marcas";
