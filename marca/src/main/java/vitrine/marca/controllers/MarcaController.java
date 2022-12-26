@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,7 @@ public class MarcaController {
 		return "marca/formMarca";
 	}
 
+//	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("marca")
 	public String salvarMarca(@Valid Marca marca, BindingResult result, RedirectAttributes attributes) {
 
@@ -168,7 +170,7 @@ public class MarcaController {
 		md.addObject("carros", carroRepository.findByMarca(marca));
 
 		return md;
-		
+
 	}
 
 }
