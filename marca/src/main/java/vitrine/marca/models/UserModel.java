@@ -98,4 +98,5 @@ public class UserModel implements UserDetails, Serializable {
 		this.password = password;
 	}
 
+	
 }
