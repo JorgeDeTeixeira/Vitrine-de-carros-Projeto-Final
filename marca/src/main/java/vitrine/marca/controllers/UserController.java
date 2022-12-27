@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/User")
 public class UserController {
-	
+
+	// private UserRepository userRepository;
+
 	@GetMapping("/login-cadastro")
 	public String formLogin() {
 		return "User/Login-Cadastro";
 	}
+
 }

@@ -29,6 +29,10 @@ public class UserModel implements UserDetails, Serializable {
 	private UUID userId;
 	@Column(nullable = false, unique = true)
 	private String username;
+	@Column(nullable = false, unique = true)
+	private String cnpj;
+	@Column(nullable = false, unique = true)
+	private String email;
 	@Column(nullable = false)
 	private String password;
 
@@ -98,4 +102,29 @@ public class UserModel implements UserDetails, Serializable {
 		this.password = password;
 	}
 
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public List<RoleModel> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<RoleModel> roles) {
+		this.roles = roles;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	
 }
