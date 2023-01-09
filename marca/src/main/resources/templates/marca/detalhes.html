@@ -1,107 +1,173 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-<title>Marca</title>
-</head>
-<body>
-	<div th:replace="~{menu :: menu}"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <title>Marca</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+    body {
+      background-color: #567ebb;
+      font-family: "Roboto", sans-serif;
+    }
+  </style>
+  <body>
+    <div th:replace="~{menu :: menu}"></div>
 
-	<div class="container">
+    <div class="container">
+      <h1 style="text-align: center; font-size: 50px;">Detalhes da marca</h1>
 
+      <div class="row">
+        <div class="col s12">
+          <div class="card #2196f3 darken-1" style="background-color: #1f1f20">
+            <div class="card-image">
+              <div class="card-content white-text">
+                <img style="border-radius: 5px" alt="" th:src="${marca.logo}" />
+                <p style="margin-top: 10px">
+                  <strong>Id: </strong><span th:text="${marca.id}"></span>
+                </p>
+                <p>
+                  <strong>Nome: </strong><span th:text="${marca.nome}"></span>
+                </p>
+                <p>
+                  <strong>Nacionalidade: </strong
+                  ><span th:text="${marca.nacionalidade}"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-		<h1>Detalhes do evento</h1>
+      <div class="row">
+        <div class="col s12">
+          <div class="card" style="background-color: #1f1f20; padding: 15px">
+            <div class="card-content">
+              <span class="card-title" style="color: white"
+                >Adicionar Carro</span
+              >
+              <form
+                th:action="@{/vitrine/{idMarca}(idMarca=${marca.id})}"
+                method="post"
+              >
+                <div>
+                  <input
+                    type="hidden"
+                    name="id"
+                    th:value="${carro.id}"
+                    readonly="readonly"
+                  />
+                </div>
+                <div>
+                  <label style="color: white">Nome: </label>
+                  <input
+                    type="text"
+                    name="nome"
+                    th:value="${carro.nome}"
+                    style="color: white"
+                  />
+                </div>
+                <div>
+                  <label style="color: white">Ano: </label>
+                  <input
+                    type="number"
+                    name="ano"
+                    th:value="${carro.ano}"
+                    style="color: white"
+                  />
+                </div>
+                <div>
+                  <label style="color: white">Preço: </label>
+                  <input
+                    type="number"
+                    name="preco"
+                    th:value="${carro.preco}"
+                    style="color: white"
+                  />
+                </div>
+                <div>
+                  <label style="color: white">Imagem: </label>
+                  <input
+                    type="text"
+                    name="imagem"
+                    th:value="${carro.imagem}"
+                    style="color: white"
+                  />
+                </div>
+                <div>
+                  <button
+                    class="waves-effect waves-light btn"
+                    type="submit"
+                    style="background-color: #567ebb"
+                  >
+                    Salvar
+                  </button>
+                  <button
+                    class="waves-effect waves-light btn"
+                    type="reset"
+                    style="background-color: #567ebb"
+                  >
+                    Limpar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
 
-		<div class="row">
-			<div class="col s12">
-				<div class="card #2196f3 blue darken-1">
-					<div class="card-image">
-						<div class="card-content white-text">
-							<img style="border-radius: 5px" alt=""
-								src='th:text="${marca.logo}"'>
-							<p style="margin-top: 10px">
-								<strong>Id: </strong><span th:text="${marca.id}"></span>
-							</p>
-							<p>
-								<strong>Nome: </strong><span th:text="${marca.nome}"></span>
-							</p>
-							<p>
-								<strong>Nacionalidade: </strong><span
-									th:text="${marca.nacionalidade}"></span>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+      <h1 style="text-align: center; font-size: 50px;">Listagem de carros</h1>
 
-		<div class="row">
-			<div class="col s12">
-				<div class="card">
-					<div class="card-content">
-						<span class="card-title">Adicionar Carro</span>
-						<form th:action="@{/vitrine/{idMarca}(idMarca=${marca.id})}"
-							method="post">
-							<div>
-								<input type="hidden" name="id" th:value="${carro.id}"
-									readonly="readonly">
-							</div>
-							<div>
-								<label>Nome: </label> <input type="text" name="nome"
-									th:value="${carro.nome}">
-							</div>
-							<div>
-								<label>Ano: </label> <input type="number" name="ano"
-									th:value="${carro.preco}">
-							</div>
-							<div>
-								<label>Preço: </label> <input type="number" name="preco"
-									th:value="${carro.preco}">
-							</div>
-							<div>
-								<label>Imagem: </label> <input type="text" name="imagem"
-									th:value="${carro.imagem}">
-							</div>
-							<div>
-								<button class="waves-effect waves-light btn" type="submit">Salvar</button>
-								<button class="waves-effect waves-light btn" type="reset">Limpar</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row" th:each="c : ${carros}">
-			<div class="col s12">
-				<div class="card">
-					<div class="card-image">
-						<img src="th:text='${c.imagem}'"> <span class="card-title">Nome</span>
-					</div>
-					<div class="card-content">
-						<p>
-							Ano: <strong th:text="${c.ano}"></strong>
-						</p>
-						<p>
-							Preço: <strong th:text="${c.preco}"></strong>
-						</p>
-						<div style="margin-top: 10px">
-							<a
-								th:href="@{/vitrine/{idMarca}/carros/{idCarro}/remover(idMarca=${marca.id}, idCarro=${c.id})}">
-								<button class="waves-effect waves-light btn">deletar</button>
-							</a> <a
-								th:href="@{/vitrine/{idMarca}/carros/{idCarro}/selecionar(idMarca=${marca.id}, idCarro=${c.id})}">
-								<button class="waves-effect waves-light btn">editar</button>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
+      <div class="row" th:each="c : ${carros}" >
+        <div class="col s12">
+          <div class="card">
+            <div class="card-image">
+              <img th:src="${c.imagem}" />
+              <strong
+                ><span class="card-title" th:text="${c.nome}"></span
+              ></strong>
+            </div>
+            <div class="card-content" style="background-color: #1f1f20">
+              <p style="color: white">
+                Ano: <strong th:text="${c.ano}"></strong>
+              </p>
+              <p style="color: white">
+                Preço: <strong th:text="${c.preco}"></strong>
+              </p>
+              <div style="margin-top: 10px">
+                <a
+                  th:href="@{/vitrine/{idMarca}/carros/{idCarro}/remover(idMarca=${marca.id}, idCarro=${c.id})}"
+                >
+                  <button
+                    class="waves-effect waves-light btn"
+                    style="background-color: #567ebb"
+                  >
+                    deletar
+                  </button>
+                </a>
+                <a
+                  th:href="@{/vitrine/{idMarca}/carros/{idCarro}/selecionar(idMarca=${marca.id}, idCarro=${c.id})}"
+                >
+                  <button
+                    class="waves-effect waves-light btn"
+                    style="background-color: #567ebb"
+                  >
+                    editar
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

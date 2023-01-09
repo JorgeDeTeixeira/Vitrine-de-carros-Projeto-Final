@@ -8,43 +8,66 @@
     />
     <title>Formulario</title>
   </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+    body {
+      background-color: #567ebb;
+      font-family: "Roboto", sans-serif;
+    }
+  </style>
+
   <body>
     <div th:replace="~{menu :: menu}"></div>
 
     <div class="container">
       <h1>Adicionar Marca</h1>
 
-      <form action="/vitrine/marca" method="post" th:object="${marca}">
+      <form
+        action="/vitrine/marca"
+        method="post"
+        th:object="${marca}"
+        style="background-color: #1f1f20; padding: 25px"
+      >
         <div>
           <input type="hidden" th:field="*{id}" readonly="readonly" />
         </div>
         <div>
-          <label>Nome:</label> <input type="text" th:field="*{nome}" />
+          <label style="color: white">Nome:</label>
+          <input type="text" th:field="*{nome}" style="color: white;"/>
           <p
             style="color: red; text-transform: capitalize"
             th:errors="*{nome}"
           ></p>
         </div>
         <div>
-          <label>Nacionalidade:</label>
-          <input type="text" th:field="*{nacionalidade}" />
+          <label style="color: white">Nacionalidade:</label>
+          <input type="text" th:field="*{nacionalidade}" style="color: white" />
           <p
             style="color: red; text-transform: capitalize"
             th:errors="*{nacionalidade}"
           ></p>
         </div>
         <div>
-          <label>Logo:</label> <input type="text" th:field="*{logo}" />
+          <label style="color: white">Logo:</label>
+          <input type="text" th:field="*{logo}" style="color: white" />
           <p
             style="color: red; text-transform: capitalize"
             th:errors="*{logo}"
           ></p>
         </div>
-        <div>
-          <button class="waves-effect waves-light btn" type="submit">
+        <div style="margin-top: 10px">
+          <button
+            class="waves-effect waves-light btn"
+            type="submit"
+            style="background-color: #567ebb"
+          >
             Salvar
           </button>
-          <button class="waves-effect waves-light btn" type="reset">
+          <button
+            class="waves-effect waves-light btn"
+            type="reset"
+            style="background-color: #567ebb"
+          >
             Limpar
           </button>
         </div>

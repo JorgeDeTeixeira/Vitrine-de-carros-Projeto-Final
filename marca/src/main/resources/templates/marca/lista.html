@@ -1,101 +1,127 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-<title>Marcas</title>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <title>Marcas</title>
 
-<style>
-.msg-alertas {
-	width: 100%;
-	overflow: hidden;
-	margin: 0 auto;
-	padding: 10px;
-	background-color: #FFFFFF;
-}
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+      body {
+        background-color: #567ebb;
+        font-family: "Roboto", sans-serif;
+      }
 
-.ms {
-	width: 100%;
-	margin: auto;
-	padding: 1em;
-	float: left;
-	display: block;
-	margin-bottom: 10px;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-weight: 100;
-	font-size: 16px;
-}
+      .msg-alertas {
+        width: 100%;
+        overflow: hidden;
+        margin: 0 auto;
+        padding: 10px;
+        background-color: #ffffff;
+      }
 
-.erro {
-	background-color: #FFCACA;
-	border: 2px #a60202 solid;
-	color: #a60202;
-	border-radius: 5px;
-}
+      .ms {
+        width: 100%;
+        margin: auto;
+        padding: 1em;
+        float: left;
+        display: block;
+        margin-bottom: 10px;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-weight: 100;
+        font-size: 16px;
+      }
 
-.ok {
-	background-color: #A6FFBC;
-	border: 2px #00bd00 solid;
-	color: #00bd00;
-	border-radius: 5px;
-}
+      .erro {
+        background-color: #ffcaca;
+        border: 2px #a60202 solid;
+        color: #a60202;
+        border-radius: 5px;
+      }
 
-.alerta {
-	background-color: #FFFFBF;
-	border: 2px #2b2b2b solid;
-	color: #2b2b2b;
-	border-radius: 5px;
-}
+      .ok {
+        background-color: #a6ffbc;
+        border: 2px #00bd00 solid;
+        color: #00bd00;
+        border-radius: 5px;
+      }
 
-.info {
-	background-color: #B3E7FF;
-	border: 2px #018ace solid;
-	color: #018ace;
-	border-radius: 5px;
-}
-</style>
+      .alerta {
+        background-color: #ffffbf;
+        border: 2px #2b2b2b solid;
+        color: #2b2b2b;
+        border-radius: 5px;
+      }
 
-</head>
-<body>
-	<div th:replace="~{menu :: menu}"></div>
+      .info {
+        background-color: #b3e7ff;
+        border: 2px #018ace solid;
+        color: #018ace;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div th:replace="~{menu :: menu}"></div>
 
-	<div class="container">
+    <div class="container">
+      <h1 style="color: #1f1f20; text-align: center; font-size: 50px;">Lista de Marcas</h1>
 
-		<h1>Lista de Carros</h1>
-
-		<div class="msg-alertas">
-			<span class="ms ok"><i class="icon icon-users-1"
-				th:if="${mensagem}" th:text="${mensagem}"></i> </span>
-		</div>
-		<div th:each="m : ${marcas}">
-			<div class="row">
-				<div class="col s12 m6">
-					<div class="card">
-						<div class="card-image">
-							<img src="th:img='${m.logo}'">
-						</div>
-						<div class="card-action">
-							<p>
-								<span class="card-title" th:text='${m.nome}'></span> - <span
-									class="card-title" th:text="${m.nacionalidade}"></span>
-							</p>
-							<a th:href="@{/vitrine/{id}(id=${m.id})}"><span>Vizualizar</span></a>
-							<div>
-								<p>
-									<a th:href="@{/vitrine/{id}/remover(id=${m.id})}"
-										style="margin-top: 10px;"><span class="material-icons">delete</span></a>
-									<a th:href="@{/vitrine/{id}/selecionar(id=${m.id})}"
-										style="margin-top: 10px;"><span class="material-icons">edit</span></a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
+      <div th:if="${mensagem}">
+        <span class="ms info"
+          ><i class="icon icon-users-1" th:text="${mensagem}"></i>
+        </span>
+      </div>
+      <div th:each="m : ${marcas}">
+        <div class="row">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-image">
+                <img th:src="${m.logo}" />
+              </div>
+              <div class="card-action" style="background-color: #1f1f20">
+                <p>
+                  <span
+                    class="card-title"
+                    th:text="${m.nome}"
+                    style="color: white"
+                  ></span> 
+                  <strong style="color: white;">  -  </strong>
+                  <span
+                    class="card-title"
+                    th:text="${m.nacionalidade}"
+                    style="color: white"
+                  ></span>
+                </p>
+                <a th:href="@{/vitrine/{id}(id=${m.id})}"
+                  ><span style="color: #567ebb">Vizualizar</span></a
+                >
+                <div>
+                  <p>
+                    <a
+                      th:href="@{/vitrine/{id}/remover(id=${m.id})}"
+                      style="margin-top: 10px; color: #567ebb"
+                      ><span class="material-icons">delete</span></a
+                    >
+                    <a
+                      th:href="@{/vitrine/{id}/selecionar(id=${m.id})}"
+                      style="margin-top: 10px; color: #567ebb"
+                      ><span class="material-icons">edit</span></a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

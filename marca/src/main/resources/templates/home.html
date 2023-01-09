@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>devsuperior</title>
+    <title>Delux cars</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="shortcut icon" href="https://icons8.com.br/icon/21706/sedan" />
     <style>
       /* font importing */
       @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
@@ -20,8 +21,8 @@
       }
 
       :root {
-        --orange: #59a87d;
-        --blue: #091c1a;
+        --orange: #567ebb;
+        --blue: #1f1f20;
         --gray: #ededed;
       }
 
@@ -502,6 +503,7 @@
         <nav>
           <p class="brand">Delux<strong>Cars</strong></p>
           <ul>
+            <li><a href="/vitrine/marcas">Vitrine</a></li>
             <li><a href="/vitrine/marca/form">Adicionar Marca</a></li>
             <a href="/User/login-cadastro"><button>Login - Cadastro</button></a>
           </ul>
@@ -524,8 +526,8 @@
     <section class="catalog" id="catalog" >
       <div class="content">
         <div class="title-wrapper-catalog">
-          <p>Find what you want</p>
-          <h3>Catalog</h3>
+          <p></p>
+          <h3></h3>
         </div>
         <div class="card-wrapper" >
           <div class="card-item" th:each="m : ${marcas}">
@@ -547,14 +549,8 @@
         <div class="content footer-links">
           <div class="footer-company">
             <h4>Empresa</h4>
-            <h6>About</h6>
-            <h6>Contact</h6>
-          </div>
-          <div class="footer-rental">
-            <h4>Rental</h4>
-            <h6>Self-Drive</h6>
-            <h6>Chauffer-Driven</h6>
-            <h6>Help</h6>
+            <h6>Sobre</h6>
+            <h6>Contato</h6>
           </div>
           <div class="footer-social">
             <h4>Permaneça conectado</h4>
@@ -571,9 +567,9 @@
           </div>
           <div class="footer-contact">
             <h4>Contato</h4>
-            <h6>+55 31 988776655</h6>
-            <h6>contato@devsuperior.com.br</h6>
-            <h6>Nome da Rua, belo horizonte MG</h6>
+            <h6>+55 84 9984857373</h6>
+            <h6>deluxcars@gmail.com</h6>
+            <h6>Rua linda, RJ</h6>
           </div>
         </div>
       </div>
