@@ -1,19 +1,16 @@
 package vitrine.marca.models;
 
 import java.io.Serializable;
-import java.util.UUID;
+import java.util.Objects;
 
 import org.springframework.security.core.GrantedAuthority;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import vitrine.marca.enums.RoleName;
 
 @Entity
 @Table(name = "TB_ROLE")
@@ -23,35 +20,57 @@ public class RoleModel implements GrantedAuthority, Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(length = 40)
-	private UUID roleId;
-	@Enumerated(EnumType.STRING)
+	private Long roleId;
+	// @Enumerated(EnumType.STRING)
 	@Column(nullable = false, unique = true)
-	private RoleName roleName;
+	private String roleName;
 
 	@Override
 	public String getAuthority() {
 		// TODO Auto-generated method stub
-		return this.roleName.toString();
+		return this.roleName;
 	}
 
-	public UUID getRoleId() {
+	public Long getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(UUID roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 
-	public RoleName getRoleName() {
+	public String getRoleName() {
 		return roleName;
 	}
 
-	public void setRoleName(RoleName roleName) {
+	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "RoleModel [roleId=" + roleId + ", roleName=" + roleName + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(roleId, roleName);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RoleModel other = (RoleModel) obj;
+		return Objects.equals(roleId, other.roleId) && Objects.equals(roleName, other.roleName);
 	}
 
 }
