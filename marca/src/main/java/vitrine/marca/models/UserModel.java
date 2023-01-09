@@ -3,7 +3,7 @@ package vitrine.marca.models;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
+import java.util.Objects;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +26,7 @@ public class UserModel implements UserDetails, Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(length = 40)
-	private UUID userId;
+	private Long userId;
 	@Column(nullable = false, unique = true)
 	private String username;
 	@Column(nullable = false, unique = true)
@@ -82,11 +82,11 @@ public class UserModel implements UserDetails, Serializable {
 		return true;
 	}
 
-	public UUID getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -126,5 +126,29 @@ public class UserModel implements UserDetails, Serializable {
 		this.email = email;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "UserModel [userId=" + userId + ", username=" + username + ", cnpj=" + cnpj + ", email=" + email
+				+ ", password=" + password + ", roles=" + roles + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cnpj, email, password, roles, userId, username);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserModel other = (UserModel) obj;
+		return Objects.equals(cnpj, other.cnpj) && Objects.equals(email, other.email)
+				&& Objects.equals(password, other.password) && Objects.equals(roles, other.roles)
+				&& Objects.equals(userId, other.userId) && Objects.equals(username, other.username);
+	}
+
 }

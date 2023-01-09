@@ -23,7 +23,7 @@
     <div th:replace="~{menu :: menu}"></div>
 
     <div class="container">
-      <h1 style="text-align: center; font-size: 50px;">Detalhes da marca</h1>
+      <h1 style="text-align: center; font-size: 50px">Detalhes da marca</h1>
 
       <div class="row">
         <div class="col s12">
@@ -57,12 +57,13 @@
               <form
                 th:action="@{/vitrine/{idMarca}(idMarca=${marca.id})}"
                 method="post"
+                th:object="${carro}"
               >
                 <div>
                   <input
                     type="hidden"
                     name="id"
-                    th:value="${carro.id}"
+                    th:field="*{id}"
                     readonly="readonly"
                   />
                 </div>
@@ -71,7 +72,7 @@
                   <input
                     type="text"
                     name="nome"
-                    th:value="${carro.nome}"
+                    th:field="*{nome}"
                     style="color: white"
                   />
                 </div>
@@ -80,7 +81,7 @@
                   <input
                     type="number"
                     name="ano"
-                    th:value="${carro.ano}"
+                    th:field="*{ano}"
                     style="color: white"
                   />
                 </div>
@@ -89,16 +90,20 @@
                   <input
                     type="number"
                     name="preco"
-                    th:value="${carro.preco}"
+                    th:field="*{preco}"
                     style="color: white"
                   />
+                  <p
+                    style="color: red; text-transform: capitalize"
+                    th:errors="*{nome}"
+                  ></p>
                 </div>
                 <div>
                   <label style="color: white">Imagem: </label>
                   <input
                     type="text"
                     name="imagem"
-                    th:value="${carro.imagem}"
+                    th:field="*{imagem}"
                     style="color: white"
                   />
                 </div>
@@ -124,9 +129,9 @@
         </div>
       </div>
 
-      <h1 style="text-align: center; font-size: 50px;">Listagem de carros</h1>
+      <h1 style="text-align: center; font-size: 50px">Listagem de carros</h1>
 
-      <div class="row" th:each="c : ${carros}" >
+      <div class="row" th:each="c : ${carros}">
         <div class="col s12">
           <div class="card">
             <div class="card-image">
